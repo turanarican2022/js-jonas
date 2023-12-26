@@ -11,7 +11,9 @@ const restaurant = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
   openingHours: {
     thu: {
       open: 12,
@@ -27,3 +29,23 @@ const restaurant = {
     },
   },
 };
+
+// DESTRUCTURING ARRAYS
+let [firstCategory, secondCategory] = restaurant.categories;
+console.log(firstCategory, secondCategory);
+
+// SWITCHING ELEMENTS
+[firstCategory, secondCategory] = [secondCategory, firstCategory];
+console.log(firstCategory, secondCategory);
+
+// RECEIVE 2 RETURN VALUES FROM A FUNCTION
+const [starterMeal, mainMeal] = restaurant.order(2, 0);
+console.log(starterMeal, mainMeal);
+
+// DESTRUCTURING NESTED ARRAYS
+const [a, b = 7, [c, d], , e] = [1, 2, [3, 4, 5], 6, 9];
+console.log(a, b, c, d, e);
+
+// DEFAULT VALUES
+const [f = 1, g = 7, h] = [3, , 4];
+console.log(f, g, h);
