@@ -14,6 +14,12 @@ const restaurant = {
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
+  // PARAMETER DESTRUCTURING
+  orderDelivery({ starterIndex, mainIndex, address = 'Sonarella St. 4rd.' }) {
+    console.log(
+      `order received: ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} should be delivered to the address; ${address}`
+    );
+  },
   openingHours: {
     thu: {
       open: 12,
@@ -30,22 +36,44 @@ const restaurant = {
   },
 };
 
-// DESTRUCTURING ARRAYS
-let [firstCategory, secondCategory] = restaurant.categories;
-console.log(firstCategory, secondCategory);
+// DESTRUCTURING OBJECTS
+const { name, categories, openingHours } = restaurant;
+console.log(name, categories, openingHours);
 
-// SWITCHING ELEMENTS
-[firstCategory, secondCategory] = [secondCategory, firstCategory];
-console.log(firstCategory, secondCategory);
-
-// RECEIVE 2 RETURN VALUES FROM A FUNCTION
-const [starterMeal, mainMeal] = restaurant.order(2, 0);
-console.log(starterMeal, mainMeal);
-
-// DESTRUCTURING NESTED ARRAYS
-const [a, b = 7, [c, d], , e] = [1, 2, [3, 4, 5], 6, 9];
-console.log(a, b, c, d, e);
+// DIFFERENT VARIABLE NAMES THAN PROPERTY NAMES
+const {
+  name: restaurantName,
+  categories: restCategories,
+  openingHours: restOpeningHours,
+} = restaurant;
+console.log(restaurantName, restCategories, restOpeningHours);
 
 // DEFAULT VALUES
-const [f = 1, g = 7, h] = [3, , 4];
-console.log(f, g, h);
+const { menu = [], starterMenu: starter = [] } = restaurant;
+console.log(menu, starter);
+
+// MUTATING VARIABLES
+let a = 1;
+let b = 2;
+const obj = { a: '3', b: '4' };
+({ a, b } = obj);
+console.log(a, b);
+
+// NESTED OBJECTS
+const {
+  thu: { open, close },
+  fri: { open: friOpen, close: friClose },
+  sat: saturday,
+} = restaurant.openingHours;
+console.log(open, close, friOpen, friClose, saturday);
+
+// PARAMETER DESTRUCTURING
+restaurant.orderDelivery({
+  starterIndex: 2,
+  mainIndex: 2,
+  address: 'Villa della al Espanolea 21st century',
+});
+restaurant.orderDelivery({
+  starterIndex: 2,
+  mainIndex: 2,
+});
