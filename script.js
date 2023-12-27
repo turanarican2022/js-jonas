@@ -20,6 +20,10 @@ const restaurant = {
       `order received: ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} should be delivered to the address; ${address}`
     );
   },
+  // SPREAD OPERATOR WITH FUNCTION ARGUMENTS
+  orderPasta(ing1, ing2, ing3) {
+    console.log(`Here a pasta with ${ing1}, ${ing2} and ${ing3}`);
+  },
   openingHours: {
     thu: {
       open: 12,
@@ -36,44 +40,92 @@ const restaurant = {
   },
 };
 
-// DESTRUCTURING OBJECTS
-const { name, categories, openingHours } = restaurant;
-console.log(name, categories, openingHours);
+// SPREAD OPERATOR
+const arr = [3, 4, 5];
+const newArr = [1, 2, ...arr];
+console.log(newArr); // (5) [1, 2, 3, 4, 5]
+console.log(...newArr); // 1 2 3 4 5
 
-// DIFFERENT VARIABLE NAMES THAN PROPERTY NAMES
+restaurant.mainMenu = [...restaurant.mainMenu, 'Gnocci'];
+console.log(restaurant.mainMenu); // (4) ['Pizza', 'Pasta', 'Risotto', 'Gnocci']
+
+// COPY ARRAY USING SPREAD OPERATOR (SHALLOW COPY)
+const mainMenuCopy = [...restaurant.mainMenu];
+console.log(mainMenuCopy); // (4) ['Pizza', 'Pasta', 'Risotto', 'Gnocci']
+
+// JOIN ARRAYS USING SPREAD OPERATOR
+const fullMenu = [...restaurant.mainMenu, ...restaurant.starterMenu];
+console.log(fullMenu); // (8) ['Pizza', 'Pasta', 'Risotto', 'Gnocci', 'Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
+
+/*  SPREAD OPERATOR CAN BU USED WITH ITERABLES 
+    array, string, map, set but NOT object
+*/ // using SPREAD OPERATOR WITH string
+const lettersOfMyName = [...'Nitissa'];
+console.log(lettersOfMyName); // (7) ['N', 'i', 't', 'i', 's', 's', 'a']
+
+// SPREAD OPERATOR WITH FUNCTION ARGUMENTS
+restaurant.orderPasta(...['Mushrooms', 'Asparagus', 'Cheese']); // Here a pasta with Mushrooms, Asparagus and Cheese
+
+// CONDITIONALLY ADDING PROPERTIES TO AN ARRAY WITH SPREAD OPERATOR
+const isSold = true;
+let cars = ['Citroen', 'Alfa Romeo'];
+cars = [...cars, ...(isSold ? ['Mazda', 'Fiat'] : [])];
+console.log('---cond. add. prop. to. arr.--> \n', cars);
+
+// SINCE ES6 THE SPREAD OPERATOR ALSO WORKS WITH OBJECTS
+const restaurantCopy = { ...restaurant };
+console.log('---deep clone? NO!-->\n', restaurantCopy);
+//  YEEEEEYYYY! MADE A "DEEP COPY" --->>> sorry to myself, i did a
+//  mistake here, this only copies as shallow, nested objects
+//  are copied as references
+// {name: 'Classico Italiano', location: 'Via Angelo Tavanti 23, Firenze, Italy', categories: Array(4), starterMenu: Array(4), mainMenu: Array(4), …}
+
+// EXPANDING (kind of...)
+const advancedRestaurant = {
+  foundedIn: 2027,
+  ...restaurant,
+  name: "Stipotto's Hally", // override the name property's value here
+  foundedBy: ['Nitissa', 'Aaron'],
+};
+console.log(advancedRestaurant);
+// {foundedIn: 2027, name: 'Stipotto's Hally', location: 'Via Angelo Tavanti 23, Firenze, Italy', categories: Array(4), starterMenu: Array(4), …}
+
+// SPREADING OBJECT INTO VARIABLES
 const {
   name: restaurantName,
-  categories: restCategories,
-  openingHours: restOpeningHours,
+  location: restaurantLocation,
+  categories,
+  starterMenu,
+  mainMenu,
+  order,
+  orderDelivery,
+  orderPasta,
 } = restaurant;
-console.log(restaurantName, restCategories, restOpeningHours);
+console.log(
+  '---spread obj into vars-->\n',
+  restaurantName,
+  restaurantLocation,
+  categories,
+  starterMenu,
+  mainMenu,
+  order,
+  orderDelivery,
+  orderPasta
+);
 
-// DEFAULT VALUES
-const { menu = [], starterMenu: starter = [] } = restaurant;
-console.log(menu, starter);
+// SPREADING ARRAYS INTO OBJECTS
+const arrAy = ['Citroen', 'Alfa Romeo', 'Mazda', 'Fiat'];
+const obJ = { ...arrAy };
+console.log('---spread arrays into obj-->\n', obJ); // {0: 'Citroen', 1: 'Alfa Romeo', 2: 'Mazda', 3: 'Fiat'}
 
-// MUTATING VARIABLES
-let a = 1;
-let b = 2;
-const obj = { a: '3', b: '4' };
-({ a, b } = obj);
-console.log(a, b);
+// CONDITIONALLY ADDING PROPERTIES TO AN OBJECT WITH SPREAD OPERATOR
 
-// NESTED OBJECTS
-const {
-  thu: { open, close },
-  fri: { open: friOpen, close: friClose },
-  sat: saturday,
-} = restaurant.openingHours;
-console.log(open, close, friOpen, friClose, saturday);
-
-// PARAMETER DESTRUCTURING
-restaurant.orderDelivery({
-  starterIndex: 2,
-  mainIndex: 2,
-  address: 'Villa della al Espanolea 21st century',
-});
-restaurant.orderDelivery({
-  starterIndex: 2,
-  mainIndex: 2,
-});
+const isGameOver = false;
+let gameScores = { COD: 78, COLIN: 81, CITIES: 13 };
+gameScores = {
+  ...gameScores,
+  ...(!isGameOver ? { TWOSOULS: 90, SKYRIM: 23 } : {}),
+  // ALSO THE SAME --> ...(!isGameOver && { TWOSOULS: 90, SKYRIM: 23 })
+};
+console.log('---cond. add. prop. to. obj.--> \n', gameScores); // {COD: 78, COLIN: 81, CITIES: 13, TWOSOULS: 90, SKYRIM: 23}
+//
