@@ -128,4 +128,3 @@ gameScores = {
   // ALSO THE SAME --> ...(!isGameOver && { TWOSOULS: 90, SKYRIM: 23 })
 };
 console.log('---cond. add. prop. to. obj.--> \n', gameScores); // {COD: 78, COLIN: 81, CITIES: 13, TWOSOULS: 90, SKYRIM: 23}
-//
