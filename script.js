@@ -32,20 +32,21 @@ const restaurant = {
 
 // DESTRUCTURING ARRAYS
 let [firstCategory, secondCategory] = restaurant.categories;
-console.log(firstCategory, secondCategory);
+console.log(firstCategory, secondCategory); // Italian Pizzeria
 
 // SWITCHING ELEMENTS
 [firstCategory, secondCategory] = [secondCategory, firstCategory];
-console.log(firstCategory, secondCategory);
+console.log(firstCategory, secondCategory); // Pizzeria Italian
 
 // RECEIVE 2 RETURN VALUES FROM A FUNCTION
 const [starterMeal, mainMeal] = restaurant.order(2, 0);
-console.log(starterMeal, mainMeal);
+console.log('first val--> ', starterMeal, '| second val--> ', mainMeal);
+// first val-->  Garlic Bread | second val-->  Pizza
 
 // DESTRUCTURING NESTED ARRAYS
 const [a, b = 7, [c, d], , e] = [1, 2, [3, 4, 5], 6, 9];
-console.log(a, b, c, d, e);
+console.log(a, b, c, d, e); // 1 2 3 4 9
 
 // DEFAULT VALUES
 const [f = 1, g = 7, h] = [3, , 4];
-console.log(f, g, h);
+console.log(f, g, h); // 3 7 4
