@@ -15,7 +15,7 @@ const restaurant = {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
   // PARAMETER DESTRUCTURING
-  orderDelivery({ starterIndex, mainIndex, address = 'Sonarella St. 4rd.' }) {
+  orderDelivery({ starterIndex, mainIndex, address = 'Sonarella St. 4th.' }) {
     console.log(
       `order received: ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} should be delivered to the address; ${address}`
     );
@@ -39,6 +39,7 @@ const restaurant = {
 // DESTRUCTURING OBJECTS
 const { name, categories, openingHours } = restaurant;
 console.log(name, categories, openingHours);
+// Classico Italiano (4) ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'] {thu: {…}, fri: {…}, sat: {…}}
 
 // DIFFERENT VARIABLE NAMES THAN PROPERTY NAMES
 const {
@@ -47,17 +48,19 @@ const {
   openingHours: restOpeningHours,
 } = restaurant;
 console.log(restaurantName, restCategories, restOpeningHours);
+// Classico Italiano (4) ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'] {thu: {…}, fri: {…}, sat: {…}}
 
 // DEFAULT VALUES
 const { menu = [], starterMenu: starter = [] } = restaurant;
 console.log(menu, starter);
+// (0) [] (4) ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
 
 // MUTATING VARIABLES
 let a = 1;
 let b = 2;
 const obj = { a: '3', b: '4' };
 ({ a, b } = obj);
-console.log(a, b);
+console.log(a, b); // 3 4
 
 // NESTED OBJECTS
 const {
@@ -65,15 +68,15 @@ const {
   fri: { open: friOpen, close: friClose },
   sat: saturday,
 } = restaurant.openingHours;
-console.log(open, close, friOpen, friClose, saturday);
+console.log(open, close, friOpen, friClose, saturday); // 12 22 11 23 {open: 0, close: 24}
 
 // PARAMETER DESTRUCTURING
 restaurant.orderDelivery({
   starterIndex: 2,
   mainIndex: 2,
   address: 'Villa della al Espanolea 21st century',
-});
+}); // order received: Garlic Bread and Risotto should be delivered to the address; Villa della al Espanolea 21st century
 restaurant.orderDelivery({
   starterIndex: 2,
   mainIndex: 2,
-});
+}); // order received: Garlic Bread and Risotto should be delivered to the address; Sonarella St. 4th.
