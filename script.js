@@ -40,91 +40,32 @@ const restaurant = {
   },
 };
 
-// SPREAD OPERATOR
-const arr = [3, 4, 5];
-const newArr = [1, 2, ...arr];
-console.log(newArr); // (5) [1, 2, 3, 4, 5]
-console.log(...newArr); // 1 2 3 4 5
+// REST OPERATOR
+/*  collects elements in contrast to spread operator
+    spread operator is used on the right side of equal sign "="
+    whereas rest operator is used on the left side
+*/
 
-restaurant.mainMenu = [...restaurant.mainMenu, 'Gnocci'];
-console.log(restaurant.mainMenu); // (4) ['Pizza', 'Pasta', 'Risotto', 'Gnocci']
-
-// COPY ARRAY USING SPREAD OPERATOR (SHALLOW COPY)
-const mainMenuCopy = [...restaurant.mainMenu];
-console.log(mainMenuCopy); // (4) ['Pizza', 'Pasta', 'Risotto', 'Gnocci']
-
-// JOIN ARRAYS USING SPREAD OPERATOR
-const fullMenu = [...restaurant.mainMenu, ...restaurant.starterMenu];
-console.log(fullMenu); // (8) ['Pizza', 'Pasta', 'Risotto', 'Gnocci', 'Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad']
-
-/*  SPREAD OPERATOR CAN BU USED WITH ITERABLES 
-    array, string, map, set but NOT object
-*/ // using SPREAD OPERATOR WITH string
-const lettersOfMyName = [...'Nitissa'];
-console.log(lettersOfMyName); // (7) ['N', 'i', 't', 'i', 's', 's', 'a']
-
-// SPREAD OPERATOR WITH FUNCTION ARGUMENTS
-restaurant.orderPasta(...['Mushrooms', 'Asparagus', 'Cheese']); // Here a pasta with Mushrooms, Asparagus and Cheese
-
-// CONDITIONALLY ADDING PROPERTIES TO AN ARRAY WITH SPREAD OPERATOR
-const isSold = true;
-let cars = ['Citroen', 'Alfa Romeo'];
-cars = [...cars, ...(isSold ? ['Mazda', 'Fiat'] : [])];
-console.log('---cond. add. prop. to. arr.--> \n', cars);
-
-// SINCE ES6 THE SPREAD OPERATOR ALSO WORKS WITH OBJECTS
-const restaurantCopy = { ...restaurant };
-console.log('---deep clone? NO!-->\n', restaurantCopy);
-//  YEEEEEYYYY! MADE A "DEEP COPY" --->>> sorry to myself, i did a
-//  mistake here, this only copies as shallow, nested objects
-//  are copied as references
-// {name: 'Classico Italiano', location: 'Via Angelo Tavanti 23, Firenze, Italy', categories: Array(4), starterMenu: Array(4), mainMenu: Array(4), …}
-
-// EXPANDING (kind of...)
-const advancedRestaurant = {
-  foundedIn: 2027,
-  ...restaurant,
-  name: "Stipotto's Hally", // override the name property's value here
-  foundedBy: ['Nitissa', 'Aaron'],
-};
-console.log(advancedRestaurant);
-// {foundedIn: 2027, name: 'Stipotto's Hally', location: 'Via Angelo Tavanti 23, Firenze, Italy', categories: Array(4), starterMenu: Array(4), …}
-
-// SPREADING OBJECT INTO VARIABLES
-const {
-  name: restaurantName,
-  location: restaurantLocation,
-  categories,
-  starterMenu,
-  mainMenu,
-  order,
-  orderDelivery,
-  orderPasta,
-} = restaurant;
+const { name, location, categories, openingHours, ...otherRestaurantInfo } =
+  restaurant;
 console.log(
-  '---spread obj into vars-->\n',
-  restaurantName,
-  restaurantLocation,
+  name,
+  location,
   categories,
-  starterMenu,
-  mainMenu,
-  order,
-  orderDelivery,
-  orderPasta
+  openingHours,
+  '\n---other restaurant info collected with rest in a new object-->\n',
+  otherRestaurantInfo
 );
+// Classico Italiano Via Angelo Tavanti 23, Firenze, Italy (4) ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'] {thu: {…}, fri: {…}, sat: {…}}
+// ---other restaurant info collected with rest in a new object-->
+//  {starterMenu: Array(4), mainMenu: Array(3), order: ƒ, orderDelivery: ƒ, orderPasta: ƒ}
 
-// SPREADING ARRAYS INTO OBJECTS
-const arrAy = ['Citroen', 'Alfa Romeo', 'Mazda', 'Fiat'];
-const obJ = { ...arrAy };
-console.log('---spread arrays into obj-->\n', obJ); // {0: 'Citroen', 1: 'Alfa Romeo', 2: 'Mazda', 3: 'Fiat'}
+// USING ... OPERATOR ON BOTH SIDES
+const [firstMeal, secondMeal, ...otherMeals] = [
+  ...restaurant.starterMenu,
+  ...restaurant.mainMenu,
+];
+console.log(firstMeal, secondMeal, otherMeals);
+// Focaccia Bruschetta (5) ['Garlic Bread', 'Caprese Salad', 'Pizza', 'Pasta', 'Risotto']
 
-// CONDITIONALLY ADDING PROPERTIES TO AN OBJECT WITH SPREAD OPERATOR
-
-const isGameOver = false;
-let gameScores = { COD: 78, COLIN: 81, CITIES: 13 };
-gameScores = {
-  ...gameScores,
-  ...(!isGameOver ? { TWOSOULS: 90, SKYRIM: 23 } : {}),
-  // ALSO THE SAME --> ...(!isGameOver && { TWOSOULS: 90, SKYRIM: 23 })
-};
-console.log('---cond. add. prop. to. obj.--> \n', gameScores); // {COD: 78, COLIN: 81, CITIES: 13, TWOSOULS: 90, SKYRIM: 23}
+// REST OPERATOR IN FUNCTIONS
