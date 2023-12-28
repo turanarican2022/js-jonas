@@ -68,4 +68,20 @@ const [firstMeal, secondMeal, ...otherMeals] = [
 console.log(firstMeal, secondMeal, otherMeals);
 // Focaccia Bruschetta (5) ['Garlic Bread', 'Caprese Salad', 'Pizza', 'Pasta', 'Risotto']
 
-// REST OPERATOR IN FUNCTIONS
+// REST OPERATOR IN FUNCTIONS (TO ACCEPT ANY NUMBER OF PARAMETERS!!!)
+restaurant.guestCooks = function (...guestCooks) {
+  let guestcooks = '';
+  for (let i = 0; i < guestCooks.length; i++) {
+    guestcooks += `${guestCooks[i]}, `;
+  }
+  guestcooks = guestcooks.slice(0, -2);
+  console.log(`These guest cooks will be cooking today with us; ${guestcooks}`);
+};
+restaurant.guestCooks('Tim', 'Ton', 'Tuckle'); // These guest cooks will be cooking today with us; Tim, Ton, Tuckle
+
+// REST OPERATOR IN FUNCTION ARGUMENTS AND SPREAD OPERATOR IN FUNCTION CALLS
+/*  This may seem useless but in this way we can make a function accepting both
+    seperated values and arrays
+*/
+const todaysGuestCooks = ['Jemmy', 'Jammer', 'JinSlayer'];
+restaurant.guestCooks(...todaysGuestCooks); // These guest cooks will be cooking today with us; Jemmy, Jammer, JinSlayer
