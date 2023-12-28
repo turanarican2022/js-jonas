@@ -40,48 +40,32 @@ const restaurant = {
   },
 };
 
-// REST OPERATOR
-/*  collects elements in contrast to spread operator
-    spread operator is used on the right side of equal sign "="
-    whereas rest operator is used on the left side
-*/
+// SHORT CIRCUITING WITH OR OPERATOR
+/* Use ANY datatype, return ANY datatype */
+// SHORT CIRCUITING WITH THE "OR" || OPERATOR
+/* if the first value is TRUTHY, it will immediately return the first value */
+/* if none of the values are TRUTHY, it will return the last FALSY value */
+/* if there are multiple values, the first found TRUTHY is returned */
+console.log('----OR----');
+console.log('Halit' || 38); // Halit
+console.log(38 || 'Halit'); // 38
+const age = 38;
+console.log(false || age >= 18); // true
+console.log(0 || undefined); // undefined
+console.log(undefined || null || age === 12 || 'Halit' || 'Turan' || 0); // Halit
+restaurant.orderPasta(...['mushroom', 'spinach', 'cheese']) || false; //Here a pasta with mushroom, spinach and cheese --- !!! this one works but useless
 
-const { name, location, categories, openingHours, ...otherRestaurantInfo } =
-  restaurant;
-console.log(
-  name,
-  location,
-  categories,
-  openingHours,
-  '\n---other restaurant info collected with rest in a new object-->\n',
-  otherRestaurantInfo
-);
-// Classico Italiano Via Angelo Tavanti 23, Firenze, Italy (4) ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'] {thu: {…}, fri: {…}, sat: {…}}
-// ---other restaurant info collected with rest in a new object-->
-//  {starterMenu: Array(4), mainMenu: Array(3), order: ƒ, orderDelivery: ƒ, orderPasta: ƒ}
+// SHORT CIRCUITING WITH THE "AND" && OPERATOR
+/* if the first value is FALSY, it will immediately be returned */
+/* if none of the values are FALSY, the last TRUTHY value will be returned */
+/* if there are multiple values, the first found FALSY is returned */
+console.log('----AND----');
+console.log(false && 'Halit'); // false
+console.log('Halit' && 'Turan' && undefined && 38 && null); // undefined
+console.log('first' && 'second' && 'third is returned'); // third is returned
+/*  a practical use case of this is checking if a function exists before
+    attempting to call it */
+restaurant.orderPasta &&
+  restaurant.orderPasta(...['mushroom', 'spinach', 'cheese']); // Here a pasta with mushroom, spinach and cheese
 
-// USING ... OPERATOR ON BOTH SIDES
-const [firstMeal, secondMeal, ...otherMeals] = [
-  ...restaurant.starterMenu,
-  ...restaurant.mainMenu,
-];
-console.log(firstMeal, secondMeal, otherMeals);
-// Focaccia Bruschetta (5) ['Garlic Bread', 'Caprese Salad', 'Pizza', 'Pasta', 'Risotto']
-
-// REST OPERATOR IN FUNCTIONS (TO ACCEPT ANY NUMBER OF PARAMETERS!!!)
-restaurant.guestCooks = function (...guestCooks) {
-  let guestcooks = '';
-  for (let i = 0; i < guestCooks.length; i++) {
-    guestcooks += `${guestCooks[i]}, `;
-  }
-  guestcooks = guestcooks.slice(0, -2);
-  console.log(`These guest cooks will be cooking today with us; ${guestcooks}`);
-};
-restaurant.guestCooks('Tim', 'Ton', 'Tuckle'); // These guest cooks will be cooking today with us; Tim, Ton, Tuckle
-
-// REST OPERATOR IN FUNCTION ARGUMENTS AND SPREAD OPERATOR IN FUNCTION CALLS
-/*  This may seem useless but in this way we can make a function accepting both
-    seperated values and arrays
-*/
-const todaysGuestCooks = ['Jemmy', 'Jammer', 'JinSlayer'];
-restaurant.guestCooks(...todaysGuestCooks); // These guest cooks will be cooking today with us; Jemmy, Jammer, JinSlayer
+restaurant.orderSomeOtherThing && restaurant.orderSomeOtherThing('some thing'); // never runs, no return
