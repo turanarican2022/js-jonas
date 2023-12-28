@@ -40,32 +40,15 @@ const restaurant = {
   },
 };
 
-// SHORT CIRCUITING WITH OR OPERATOR
-/* Use ANY datatype, return ANY datatype */
-// SHORT CIRCUITING WITH THE "OR" || OPERATOR
-/* if the first value is TRUTHY, it will immediately return the first value */
-/* if none of the values are TRUTHY, it will return the last FALSY value */
-/* if there are multiple values, the first found TRUTHY is returned */
-console.log('----OR----');
-console.log('Halit' || 38); // Halit
-console.log(38 || 'Halit'); // 38
-const age = 38;
-console.log(false || age >= 18); // true
-console.log(0 || undefined); // undefined
-console.log(undefined || null || age === 12 || 'Halit' || 'Turan' || 0); // Halit
-restaurant.orderPasta(...['mushroom', 'spinach', 'cheese']) || false; //Here a pasta with mushroom, spinach and cheese --- !!! this one works but useless
+// NULLISH COALESCING OPERATOR
+/*  works with the idea of NULLISH values instead of FALSY values */
+/*  below, a value is assigned to variable other than null, here the second
+    var should take the value of the first one logically. */
+const numOfAvailableSeats = 0;
+let numOfPeopleThatCanBeInvited = numOfAvailableSeats || 10;
+console.log(numOfPeopleThatCanBeInvited); // 10
 
-// SHORT CIRCUITING WITH THE "AND" && OPERATOR
-/* if the first value is FALSY, it will immediately be returned */
-/* if none of the values are FALSY, the last TRUTHY value will be returned */
-/* if there are multiple values, the first found FALSY is returned */
-console.log('----AND----');
-console.log(false && 'Halit'); // false
-console.log('Halit' && 'Turan' && undefined && 38 && null); // undefined
-console.log('first' && 'second' && 'third is returned'); // third is returned
-/*  a practical use case of this is checking if a function exists before
-    attempting to call it */
-restaurant.orderPasta &&
-  restaurant.orderPasta(...['mushroom', 'spinach', 'cheese']); // Here a pasta with mushroom, spinach and cheese
-
-restaurant.orderSomeOtherThing && restaurant.orderSomeOtherThing('some thing'); // never runs, no return
+/*  below, zero (0) is not taken as null, it does not matter if it is not FALSY */
+/*  NULLISH VALUES are NULL and UNDEFINED */
+numOfPeopleThatCanBeInvited = numOfAvailableSeats || 12;
+console.log(numOfPeopleThatCanBeInvited); // 12
