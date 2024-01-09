@@ -39,3 +39,11 @@ const restaurant = {
     },
   },
 };
+
+// NULLISH COALESCING OPERATOR (??)
+// Short circuits only "nullish" values (null and undefined)
+// Does not short circuit 0 and '' like the OR (||) operator
+
+restaurant.guests = 0;
+console.log(restaurant.guests || 10); // 10
+console.log(restaurant.guests ?? 10); // 0
