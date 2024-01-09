@@ -40,26 +40,43 @@ const restaurant = {
   },
 };
 
-// LOGICAL ASSIGNMENT OPERATORS
+// LOOPING ARRAYS - FOR OF LOOP
 
-// the OR assignment operator
-const restaurant1 = {
-  resName: 'Capricorn',
-  numTables: 23,
-  otoparkCapacity: 0,
-};
-const restaurant2 = {
-  resName: 'Gemini',
-  owner: 'Nerisenco',
-};
-restaurant1.numTables ||= 10; // equals restaurant1.numTables = restaurant1.numTables || 10
-restaurant2.numTables ||= 10; // // assign a value to a variable if it is currently falsy
-console.log(restaurant1.numTables, restaurant2.numTables); // 23 10
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
 
-// the NULLISH assignment operator
-restaurant1.otoparkCapacity ??= 12; // assign a value to a variable if it is currently nullish
-console.log(restaurant1.otoparkCapacity); // 0
+for (const meal of menu) {
+  console.log(meal); /*
+Focaccia
+Bruschetta
+Garlic Bread
+Caprese Salad
+Pizza
+Pasta
+Risotto
+*/
+}
 
-// the AND assignment operator
-restaurant2.owner &&= 'ANONYMOUS'; // assign a value to a variable if it is currently truthy
-console.log(restaurant2.owner); // ANONYMOUS
+console.log(menu.entries()); // Array Iterator
+console.log([...menu.entries()]); // (7) [Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
+
+for (const meal of menu.entries()) console.log(meal[0], meal[1]);
+/*
+0 Focaccia
+1 Bruschetta
+2 Garlic Bread
+3 Caprese Salad
+4 Pizza
+5 Pasta
+6 Risotto
+*/
+
+for (const [i, el] of menu.entries()) console.log(`${i} corresponds to ${el}`);
+/*
+0 corresponds to Focaccia
+1 corresponds to Bruschetta
+2 corresponds to Garlic Bread
+3 corresponds to Caprese Salad
+4 corresponds to Pizza
+5 corresponds to Pasta
+6 corresponds to Risotto
+*/
