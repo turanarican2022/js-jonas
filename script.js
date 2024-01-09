@@ -40,43 +40,51 @@ const restaurant = {
   },
 };
 
-// LOOPING ARRAYS - FOR OF LOOP
+// OPTIONAL CHAINING (?.)
+/* evaluates in "NULLISH" way */ /* it means 0 and '' evaluated "existing"... */
 
-const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
+// With Objects
+console.log(restaurant.openingHours.sat?.open); // 0
+console.log(restaurant.openingHours.mon?.close); // undefined
 
-for (const meal of menu) {
-  console.log(meal); /*
-Focaccia
-Bruschetta
-Garlic Bread
-Caprese Salad
-Pizza
-Pasta
-Risotto
+// Example
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+for (const day of days) {
+  const openHour = restaurant.openingHours[day]?.open;
+  const closeHour = restaurant.openingHours?.[`${day}`]?.close;
+  // console.log(openHour);
+  /*
+undefined
+undefined
+undefined
+12
+11
+0
+undefined
+*/
+
+  console.log(
+    openHour &&
+      closeHour &&
+      `the restaurant opens at ${openHour} and closes at ${closeHour}`
+  );
+  /*
+undefined
+undefined
+undefined
+the restaurant opens at 12 and closes at 22
+the restaurant opens at 11 and closes at 23
+0
+undefined
 */
 }
 
-console.log(menu.entries()); // Array Iterator
-console.log([...menu.entries()]); // (7) [Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
+// With Methods;
+console.log(restaurant.order?.(0, 1) ?? 'method does not exist'); // (2) ['Focaccia', 'Pasta']
 
-for (const meal of menu.entries()) console.log(meal[0], meal[1]);
-/*
-0 Focaccia
-1 Bruschetta
-2 Garlic Bread
-3 Caprese Salad
-4 Pizza
-5 Pasta
-6 Risotto
-*/
-
-for (const [i, el] of menu.entries()) console.log(`${i} corresponds to ${el}`);
-/*
-0 corresponds to Focaccia
-1 corresponds to Bruschetta
-2 corresponds to Garlic Bread
-3 corresponds to Caprese Salad
-4 corresponds to Pizza
-5 corresponds to Pasta
-6 corresponds to Risotto
-*/
+// With Arrays;
+const cars = [
+  { make: 'Citroen', year: 2012 },
+  { make: 'Alfa Romeo', year: 2008 },
+];
+console.log(cars[0]?.['make']); // Citroen
