@@ -87,6 +87,7 @@ console.log(carModels); // (4) ['C3', 156, 323, 'Marea']
 
 // looping ENTRIES
 const carsInfo = Object.entries(cars);
+console.log(carsInfo); // (4) [Array(2), Array(2), Array(2), Array(2)]
 for (const [brand, info] of carsInfo) {
   console.log(`I had a ${brand} ${info.model} car of year ${info.year}`);
   /*
