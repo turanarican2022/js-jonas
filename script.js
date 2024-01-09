@@ -40,10 +40,26 @@ const restaurant = {
   },
 };
 
-// NULLISH COALESCING OPERATOR (??)
-// Short circuits only "nullish" values (null and undefined)
-// Does not short circuit 0 and '' like the OR (||) operator
+// LOGICAL ASSIGNMENT OPERATORS
 
-restaurant.guests = 0;
-console.log(restaurant.guests || 10); // 10
-console.log(restaurant.guests ?? 10); // 0
+// the OR assignment operator
+const restaurant1 = {
+  resName: 'Capricorn',
+  numTables: 23,
+  otoparkCapacity: 0,
+};
+const restaurant2 = {
+  resName: 'Gemini',
+  owner: 'Nerisenco',
+};
+restaurant1.numTables ||= 10; // equals restaurant1.numTables = restaurant1.numTables || 10
+restaurant2.numTables ||= 10; // // assign a value to a variable if it is currently falsy
+console.log(restaurant1.numTables, restaurant2.numTables); // 23 10
+
+// the NULLISH assignment operator
+restaurant1.otoparkCapacity ??= 12; // assign a value to a variable if it is currently nullish
+console.log(restaurant1.otoparkCapacity); // 0
+
+// the AND assignment operator
+restaurant2.owner &&= 'ANONYMOUS'; // assign a value to a variable if it is currently truthy
+console.log(restaurant2.owner); // ANONYMOUS
