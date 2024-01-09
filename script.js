@@ -40,51 +40,70 @@ const restaurant = {
   },
 };
 
-// OPTIONAL CHAINING (?.)
-/* evaluates in "NULLISH" way */ /* it means 0 and '' evaluated "existing"... */
+/*******************/
+/* LOOPING OBJECTS */
+/*******************/
 
-// With Objects
-console.log(restaurant.openingHours.sat?.open); // 0
-console.log(restaurant.openingHours.mon?.close); // undefined
+const cars = {
+  Citroen: {
+    model: 'C3',
+    year: 2012,
+  },
+  'Alfa Romeo': {
+    model: 156,
+    year: 2008,
+  },
+  Mazda: {
+    model: 323,
+    year: 1994,
+  },
+  Fiat: {
+    model: 'Marea',
+    year: 2005,
+  },
+};
 
-// Example
-const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-for (const day of days) {
-  const openHour = restaurant.openingHours[day]?.open;
-  const closeHour = restaurant.openingHours?.[`${day}`]?.close;
-  // console.log(openHour);
+// looping KEYS (a.k.a. property names)
+
+const carBrands = Object.keys(cars);
+console.log(carBrands); // (4) ['Citroen', 'Alfa Romeo', 'Mazda', 'Fiat']
+
+let carModels = [];
+Object.keys(cars).forEach(car => {
+  carModels.push(cars[car].model);
+});
+console.log(carModels); // (4) ['C3', 156, 323, 'Marea']
+
+// looping VALUES (a.k.a. property values)
+
+carModels = Object.values(cars);
+console.log(carModels); // (4) [{…}, {…}, {…}, {…}]
+
+carModels = [];
+Object.values(cars).forEach(car => {
+  carModels.push(car.model);
+});
+console.log(carModels); // (4) ['C3', 156, 323, 'Marea']
+
+// looping ENTRIES
+const carsInfo = Object.entries(cars);
+for (const [brand, info] of carsInfo) {
+  console.log(`I had a ${brand} ${info.model} car of year ${info.year}`);
   /*
-undefined
-undefined
-undefined
-12
-11
-0
-undefined
-*/
-
-  console.log(
-    openHour &&
-      closeHour &&
-      `the restaurant opens at ${openHour} and closes at ${closeHour}`
-  );
-  /*
-undefined
-undefined
-undefined
-the restaurant opens at 12 and closes at 22
-the restaurant opens at 11 and closes at 23
-0
-undefined
+I had a Citroen C3 car of year 2012
+I had a Alfa Romeo 156 car of year 2008
+I had a Mazda 323 car of year 1994
+I had a Fiat Marea car of year 2005
 */
 }
 
-// With Methods;
-console.log(restaurant.order?.(0, 1) ?? 'method does not exist'); // (2) ['Focaccia', 'Pasta']
-
-// With Arrays;
-const cars = [
-  { make: 'Citroen', year: 2012 },
-  { make: 'Alfa Romeo', year: 2008 },
-];
-console.log(cars[0]?.['make']); // Citroen
+/* destructuring right at the place */
+for (const [brand, { model, year }] of carsInfo) {
+  console.log(`I had a ${brand} ${model} car of year ${year}`);
+  /*
+I had a Citroen C3 car of year 2012
+I had a Alfa Romeo 156 car of year 2008
+I had a Mazda 323 car of year 1994
+I had a Fiat Marea car of year 2005
+*/
+}
