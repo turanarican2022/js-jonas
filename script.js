@@ -39,16 +39,3 @@ const restaurant = {
     },
   },
 };
-
-// NULLISH COALESCING OPERATOR
-/*  works with the idea of NULLISH values instead of FALSY values */
-/*  below, a value is assigned to variable other than null, here the second
-    var should take the value of the first one logically. */
-const numOfAvailableSeats = 0;
-let numOfPeopleThatCanBeInvited = numOfAvailableSeats || 10;
-console.log(numOfPeopleThatCanBeInvited); // 10
-
-/*  below, zero (0) is not taken as null, it does not matter if it is not FALSY */
-/*  NULLISH VALUES are NULL and UNDEFINED */
-numOfPeopleThatCanBeInvited = numOfAvailableSeats || 12;
-console.log(numOfPeopleThatCanBeInvited); // 12
