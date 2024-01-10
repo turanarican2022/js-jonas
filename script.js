@@ -77,7 +77,13 @@ console.log(carModels); // (4) ['C3', 156, 323, 'Marea']
 // looping VALUES (a.k.a. property values)
 
 carModels = Object.values(cars);
-console.log(carModels); // (4) [{…}, {…}, {…}, {…}]
+console.log(carModels); /*
+[
+  { model: 'C3', year: 2012 },
+  { model: 156, year: 2008 },
+  { model: 323, year: 1994 },
+  { model: 'Marea', year: 2005 }
+] */
 
 carModels = [];
 Object.values(cars).forEach(car => {
@@ -87,7 +93,13 @@ console.log(carModels); // (4) ['C3', 156, 323, 'Marea']
 
 // looping ENTRIES
 const carsInfo = Object.entries(cars);
-console.log(carsInfo); // (4) [Array(2), Array(2), Array(2), Array(2)]
+console.log(carsInfo); /*
+[
+  [ 'Citroen', { model: 'C3', year: 2012 } ],
+  [ 'Alfa Romeo', { model: 156, year: 2008 } ],
+  [ 'Mazda', { model: 323, year: 1994 } ],
+  [ 'Fiat', { model: 'Marea', year: 2005 } ]
+] */
 for (const [brand, info] of carsInfo) {
   console.log(`I had a ${brand} ${info.model} car of year ${info.year}`);
   /*
