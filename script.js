@@ -40,83 +40,64 @@ const restaurant = {
   },
 };
 
-/*******************/
-/* LOOPING OBJECTS */
-/*******************/
+/*************************************/
+/* SETS - COLECTION OF UNIQUE VALUES */
+/*************************************/
 
-const cars = {
-  Citroen: {
-    model: 'C3',
-    year: 2012,
-  },
-  'Alfa Romeo': {
-    model: 156,
-    year: 2008,
-  },
-  Mazda: {
-    model: 323,
-    year: 1994,
-  },
-  Fiat: {
-    model: 'Marea',
-    year: 2005,
-  },
-};
+const cars = new Set([
+  'Citroen',
+  'Alfa Romeo',
+  'Citroen',
+  'BMW',
+  'Fiat',
+  'Mazda',
+  'BMW',
+]);
+console.log(cars);
+// Set(5) { 'Citroen', 'Alfa Romeo', 'BMW', 'Fiat', 'Mazda' }
 
-// looping KEYS (a.k.a. property names)
+// sets are iterables
+console.log(new Set('Turan'));
+// Set(5) { 'T', 'u', 'r', 'a', 'n' }
 
-const carBrands = Object.keys(cars);
-console.log(carBrands); // (4) ['Citroen', 'Alfa Romeo', 'Mazda', 'Fiat']
+console.log(cars.size); // 5
 
-let carModels = [];
-Object.keys(cars).forEach(car => {
-  carModels.push(cars[car].model);
-});
-console.log(carModels); // (4) ['C3', 156, 323, 'Marea']
+console.log(cars.has('Alfa Romeo')); // true
+console.log(cars.has('Mercedes')); // false
 
-// looping VALUES (a.k.a. property values)
+cars.add('Porsche');
+console.log(cars);
+// Set(6) { 'Citroen', 'Alfa Romeo', 'BMW', 'Fiat', 'Mazda', 'Porsche' }
 
-carModels = Object.values(cars);
-console.log(carModels); /*
-[
-  { model: 'C3', year: 2012 },
-  { model: 156, year: 2008 },
-  { model: 323, year: 1994 },
-  { model: 'Marea', year: 2005 }
-] */
+cars.delete('Fiat');
+console.log(cars);
+// Set(5) { 'Citroen', 'Alfa Romeo', 'BMW', 'Mazda', 'Porsche' }
 
-carModels = [];
-Object.values(cars).forEach(car => {
-  carModels.push(car.model);
-});
-console.log(carModels); // (4) ['C3', 156, 323, 'Marea']
+// in sets there are no indexes ---> cars[0] ---> invalid
 
-// looping ENTRIES
-const carsInfo = Object.entries(cars);
-console.log(carsInfo); /*
-[
-  [ 'Citroen', { model: 'C3', year: 2012 } ],
-  [ 'Alfa Romeo', { model: 156, year: 2008 } ],
-  [ 'Mazda', { model: 323, year: 1994 } ],
-  [ 'Fiat', { model: 'Marea', year: 2005 } ]
-] */
-for (const [brand, info] of carsInfo) {
-  console.log(`I had a ${brand} ${info.model} car of year ${info.year}`);
-  /*
-I had a Citroen C3 car of year 2012
-I had a Alfa Romeo 156 car of year 2008
-I had a Mazda 323 car of year 1994
-I had a Fiat Marea car of year 2005
+// cars.clear();
+// console.log(cars); // Set(0) {}
+
+// as sets are iterables;
+for (let car of cars) console.log(car);
+/*
+Citroen
+Alfa Romeo
+BMW
+Mazda
+Porsche
 */
-}
 
-/* destructuring right at the place */
-for (const [brand, { model, year }] of carsInfo) {
-  console.log(`I had a ${brand} ${model} car of year ${year}`);
-  /*
-I had a Citroen C3 car of year 2012
-I had a Alfa Romeo 156 car of year 2008
-I had a Mazda 323 car of year 1994
-I had a Fiat Marea car of year 2005
-*/
-}
+// a use case for set is clearing duplicate data from arrays
+const carsIhad = [
+  'Citroen',
+  'Alfa Romeo',
+  'Mazda',
+  'Alfa Romeo',
+  'Fiat',
+  'BMW',
+  'BMW',
+];
+const carBrandsIHad = [...new Set(carsIhad)];
+console.log(carBrandsIHad);
+// [ 'Citroen', 'Alfa Romeo', 'Mazda', 'Fiat', 'BMW' ]
