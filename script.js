@@ -41,63 +41,52 @@ const restaurant = {
 };
 
 /*************************************/
-/* SETS - COLECTION OF UNIQUE VALUES */
+/* MAPS - TO MAP VALUES TO KEYS      */
+/* THE KEY CAN BE ANY TYPE           */
 /*************************************/
 
-const cars = new Set([
-  'Citroen',
-  'Alfa Romeo',
-  'Citroen',
-  'BMW',
-  'Fiat',
-  'Mazda',
-  'BMW',
-]);
-console.log(cars);
-// Set(5) { 'Citroen', 'Alfa Romeo', 'BMW', 'Fiat', 'Mazda' }
-
-// sets are iterables
-console.log(new Set('Turan'));
-// Set(5) { 'T', 'u', 'r', 'a', 'n' }
-
-console.log(cars.size); // 5
-
-console.log(cars.has('Alfa Romeo')); // true
-console.log(cars.has('Mercedes')); // false
-
-cars.add('Porsche');
-console.log(cars);
-// Set(6) { 'Citroen', 'Alfa Romeo', 'BMW', 'Fiat', 'Mazda', 'Porsche' }
-
-cars.delete('Fiat');
-console.log(cars);
-// Set(5) { 'Citroen', 'Alfa Romeo', 'BMW', 'Mazda', 'Porsche' }
-
-// in sets there are no indexes ---> cars[0] ---> invalid
-
-// cars.clear();
-// console.log(cars); // Set(0) {}
-
-// as sets are iterables;
-for (let car of cars) console.log(car);
+const firstCar = new Map();
+firstCar.set('brand', 'Citroen');
+firstCar.set(2012, 'year');
+firstCar.set(true, 'sold before wrecked');
+console.log(firstCar);
 /*
-Citroen
-Alfa Romeo
-BMW
-Mazda
-Porsche
+Map(3) {
+  'brand' => 'Citroen',
+  2012 => 'year',
+  true => 'sold before wrecked'
+}
 */
 
-// a use case for set is clearing duplicate data from arrays
-const carsIhad = [
-  'Citroen',
-  'Alfa Romeo',
-  'Mazda',
-  'Alfa Romeo',
-  'Fiat',
-  'BMW',
-  'BMW',
-];
-const carBrandsIHad = [...new Set(carsIhad)];
-console.log(carBrandsIHad);
-// [ 'Citroen', 'Alfa Romeo', 'Mazda', 'Fiat', 'BMW' ]
+// adding a key-value pair directly returns the new map
+console.log(firstCar.set(false, 'loved it'));
+/*
+Map(4) {
+  'brand' => 'Citroen',
+  2012 => 'year',
+  true => 'sold before wrecked',
+  false => 'loved it'
+}
+*/
+
+// set() methods can be chained
+
+// to get values;
+console.log(firstCar.get(true));
+// sold before wrecked
+
+// check keys;
+console.log(firstCar.has('brand')); // true
+
+// delete keys;
+firstCar.delete(false);
+console.log(firstCar);
+/*
+Map(3) {
+  'brand' => 'Citroen',
+  2012 => 'year',
+  true => 'sold before wrecked'
+}
+*/
+
+// there are also .clear() and .size
