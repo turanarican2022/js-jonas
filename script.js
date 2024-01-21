@@ -45,6 +45,8 @@ const restaurant = {
 /* THE KEY CAN BE ANY TYPE           */
 /*************************************/
 
+// ITERATING MAPS
+
 const firstCar = new Map();
 firstCar.set('brand', 'Citroen');
 firstCar.set(2012, 'year');
@@ -69,24 +71,77 @@ Map(4) {
 }
 */
 
-// set() methods can be chained
-
-// to get values;
-console.log(firstCar.get(true));
-// sold before wrecked
-
-// check keys;
-console.log(firstCar.has('brand')); // true
-
-// delete keys;
-firstCar.delete(false);
-console.log(firstCar);
+// Creating a map with an array of arrays
+const quiz = new Map([
+  ['question', 'the programming language you love the most?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct answer, yeeeyy!'],
+  [false, 'Try again!'],
+]);
+console.log(quiz);
 /*
-Map(3) {
-  'brand' => 'Citroen',
-  2012 => 'year',
-  true => 'sold before wrecked'
+Map(7) {
+  'question' => 'the programming language you love the most?',
+  1 => 'C',
+  2 => 'Java',
+  3 => 'JavaScript',
+  'correct' => 3,
+  true => 'Correct answer, yeeeyy!',
+  false => 'Try again!'
 }
 */
 
-// there are also .clear() and .size
+// Creating a map from an object
+// for example this is an array of arrays
+console.log(Object.entries(restaurant.openingHours));
+/*
+[
+  [ 'thu', { open: 12, close: 22 } ],
+  [ 'fri', { open: 11, close: 23 } ],
+  [ 'sat', { open: 0, close: 24 } ]
+]
+*/
+const open = new Map(Object.entries(restaurant.openingHours));
+console.log(open);
+/*
+Map(3) {
+  'thu' => { open: 12, close: 22 },
+  'fri' => { open: 11, close: 23 },
+  'sat' => { open: 0, close: 24 }
+}
+*/
+
+// Converting from map to array (of arrays)
+const quizArr = [...quiz];
+console.log(quizArr);
+/*
+[
+  [ 'question', 'the programming language you love the most?' ],
+  [ 1, 'C' ],
+  [ 2, 'Java' ],
+  [ 3, 'JavaScript' ],
+  [ 'correct', 3 ],
+  [ true, 'Correct answer, yeeeyy!' ],
+  [ false, 'Try again!' ]
+]
+*/
+
+const quizKeys = [...quiz.keys()];
+console.log(quizKeys); // [ 'question', 1, 2, 3, 'correct', true, false ]
+
+const quizValues = [...quiz.values()];
+console.log(quizValues);
+/*
+[
+  'the programming language you love the most?',
+  'C',
+  'Java',
+  'JavaScript',
+  3,
+  'Correct answer, yeeeyy!',
+  'Try again!'
+]
+*/
