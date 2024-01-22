@@ -4,144 +4,82 @@
 const flights =
   '_Delayed_Departure;fao93766109;txl2133758440;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao93766109;12:05+_Departure;fao93766109;lis2323639855;12:30';
 
-// Data needed for first part of the section
-const restaurant = {
-  name: 'Classico Italiano',
-  location: 'Via Angelo Tavanti 23, Firenze, Italy',
-  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
-  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
-  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  order: function (starterIndex, mainIndex) {
-    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
-  },
-  // PARAMETER DESTRUCTURING
-  orderDelivery({ starterIndex, mainIndex, address = 'Sonarella St. 4rd.' }) {
-    console.log(
-      `order received: ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} should be delivered to the address; ${address}`
-    );
-  },
-  // SPREAD OPERATOR WITH FUNCTION ARGUMENTS
-  orderPasta(ing1, ing2, ing3) {
-    console.log(`Here a pasta with ${ing1}, ${ing2} and ${ing3}`);
-  },
-  openingHours: {
-    thu: {
-      open: 12,
-      close: 22,
-    },
-    fri: {
-      open: 11,
-      close: 23,
-    },
-    sat: {
-      open: 0, // Open 24 hours
-      close: 24,
-    },
-  },
-};
-
 /*************************************/
-/* MAPS - TO MAP VALUES TO KEYS      */
-/* THE KEY CAN BE ANY TYPE           */
+/* WORKING WITH STRINGS              */
 /*************************************/
 
-// ITERATING MAPS
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
 
-const firstCar = new Map();
-firstCar.set('brand', 'Citroen');
-firstCar.set(2012, 'year');
-firstCar.set(true, 'sold before wrecked');
-console.log(firstCar);
-/*
-Map(3) {
-  'brand' => 'Citroen',
-  2012 => 'year',
-  true => 'sold before wrecked'
-}
-*/
+// index of a letter - returns the first occurence
+// returns -1 if not found
+console.log(airline.indexOf('P')); // 2
 
-// adding a key-value pair directly returns the new map
-console.log(firstCar.set(false, 'loved it'));
-/*
-Map(4) {
-  'brand' => 'Citroen',
-  2012 => 'year',
-  true => 'sold before wrecked',
-  false => 'loved it'
-}
-*/
+// last index of
+console.log(airline.lastIndexOf('t')); // 11
 
-// Creating a map with an array of arrays
-const quiz = new Map([
-  ['question', 'the programming language you love the most?'],
-  [1, 'C'],
-  [2, 'Java'],
-  [3, 'JavaScript'],
-  ['correct', 3],
-  [true, 'Correct answer, yeeeyy!'],
-  [false, 'Try again!'],
-]);
-console.log(quiz);
-/*
-Map(7) {
-  'question' => 'the programming language you love the most?',
-  1 => 'C',
-  2 => 'Java',
-  3 => 'JavaScript',
-  'correct' => 3,
-  true => 'Correct answer, yeeeyy!',
-  false => 'Try again!'
-}
-*/
+// slice - first index is inclusive, second index is exclusive
+// returns a new string
+console.log(airline.slice(4, 7)); // Air
+console.log(airline.slice(-8)); // Portugal
+// instead of hard-coding indexes, for example extract the first word
+console.log(airline.slice(0, airline.indexOf(' '))); // TAP
 
-// Creating a map from an object
-// for example this is an array of arrays
-console.log(Object.entries(restaurant.openingHours));
-/*
-[
-  [ 'thu', { open: 12, close: 22 } ],
-  [ 'fri', { open: 11, close: 23 } ],
-  [ 'sat', { open: 0, close: 24 } ]
-]
-*/
-const open = new Map(Object.entries(restaurant.openingHours));
-console.log(open);
-/*
-Map(3) {
-  'thu' => { open: 12, close: 22 },
-  'fri' => { open: 11, close: 23 },
-  'sat' => { open: 0, close: 24 }
-}
-*/
+// changing the case of a string
+console.log(airline.toUpperCase()); // TAP AIR PORTUGAL
+console.log(airline.toLowerCase()); // tap air portugal
+let correctCapitalization = 'halit'[0].toUpperCase();
+console.log(correctCapitalization); // H
+correctCapitalization = 'halit'[0].toUpperCase() + 'halit'.slice(1);
+console.log(correctCapitalization); // Halit
 
-// Converting from map to array (of arrays)
-const quizArr = [...quiz];
-console.log(quizArr);
-/*
-[
-  [ 'question', 'the programming language you love the most?' ],
-  [ 1, 'C' ],
-  [ 2, 'Java' ],
-  [ 3, 'JavaScript' ],
-  [ 'correct', 3 ],
-  [ true, 'Correct answer, yeeeyy!' ],
-  [ false, 'Try again!' ]
-]
-*/
+// trim() method
+console.log('   Halit Turan ARICAN   \n'.trim()); // Halit Turan ARICAN
 
-const quizKeys = [...quiz.keys()];
-console.log(quizKeys); // [ 'question', 1, 2, 3, 'correct', true, false ]
+// replace parts of the strings
+// const airline = 'TAP Air Portugal';
+const priceInEU = '€224,45';
+const priceInEUNormalized = priceInEU.replace('€', '$').replace(',', '.');
+const priceInUS = priceInEUNormalized.replace(
+  priceInEUNormalized.slice(1),
+  String(Number(priceInEUNormalized.slice(1)) * 1.2)
+);
+console.log(priceInUS); // $269.34
 
-const quizValues = [...quiz.values()];
-console.log(quizValues);
-/*
-[
-  'the programming language you love the most?',
-  'C',
-  'Java',
-  'JavaScript',
-  3,
-  'Correct answer, yeeeyy!',
-  'Try again!'
-]
-*/
+// replaceAll()
+const callToGates = 'Please come to door 11, to door 11';
+console.log(callToGates.replaceAll('door', 'gate'));
+// Please come to gate 11, to gate 11
+
+// includes(), startsWith(), endsWith()
+console.log(airline.includes('TAP')); // true
+console.log(airline.startsWith('TAP')); // true
+console.log(airline.endsWith('t')); // false
+
+// split - split a string based on a divider string
+const sentence = 'I_am_gonna make_an_artificial turf for_football';
+console.log(sentence.split('_'));
+// [ 'I', 'am', 'gonna make', 'an', 'artificial turf for', 'football' ]
+const [firstName, lastName] = 'Halit ARICAN'.split(' ');
+console.log(firstName, lastName); // Halit ARICAN
+
+// join()
+const fullName = 'Halit Turan ARICAN';
+const nameWithTitleWithPlus = ['Mr.', ...fullName.split(' ')].join('+');
+console.log(nameWithTitleWithPlus); // Mr.+Halit+Turan+ARICAN
+
+// padding a string until a certain desired length
+console.log('this is a string'.padStart(30, '+')); // ++++++++++++++this is a string
+console.log('another string'.padEnd(30, '#')); // another string################
+console.log('string'.padStart(12, '$').padEnd(18, '€')); // $$$$$$string€€€€€€
+// a use case, masking a credit card except the last 4 digits
+const creditCardNumber = 5468132409567843;
+const maskedCreditCardNumber = String(creditCardNumber)
+  .slice(-4)
+  .padStart(16, '*');
+console.log(maskedCreditCardNumber); // ************7843
+
+// repeat()
+const att = 'to the door 666 ';
+const repeatAtt = att.repeat(3);
+console.log(repeatAtt); // to the door 666 to the door 666 to the door 666
