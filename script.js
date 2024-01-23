@@ -1,8 +1,8 @@
 'use strict';
 
-/*************************************/
-/* THE bind() METHOD                 */
-/*************************************/
+/********************************************/
+/* IMMEDIATELY INVOKED FUNCTION EXPRESSIONS */
+/********************************************/
 
 const lufthansa = {
   airline: 'Lufthansa',
@@ -25,44 +25,17 @@ const eurowings = {
   bookings: [],
 };
 
-// does not immediately call the bound function
+// being called only once and then disappears
+// we don't need to save it somewhere
 
-const bookEW = lufthansa.book.bind(eurowings);
+(function () {
+  console.log(
+    'This function runs immediately and cannot be called elsewhere again'
+  );
+})(); // This function runs immediately and cannot be called elsewhere again
 
-bookEW(546, 'Halide Tuğba');
-// Halide Tuğba booked a seat on EW546 from Eurowings
+// also works with arrow functions
+(() => console.log('This will neither again runs'))(); // This will neither again runs
 
-const book = lufthansa.book;
-
-// some of the arguments can be set in stone beforehand
-const bookEW657 = book.bind(eurowings, 657);
-bookEW657('Turan ARICAN');
-// Turan ARICAN booked a seat on EW657 from Eurowings
-
-// bind() method with event listeners
-// normally, the callback function's "this" refer to the
-// HTML element calling the function upon event
-
-lufthansa.numOfPlanes = 300;
-lufthansa.buyNewPlane = function () {
-  console.log(`number of planes before buy: ${this.numOfPlanes}`);
-  this.numOfPlanes++;
-  console.log(`a new one bought and now it is ${this.numOfPlanes}`);
-};
-
-const newPlaneBtnLF = document.querySelector('.lf-buy');
-
-newPlaneBtnLF.addEventListener('click', lufthansa.buyNewPlane.bind(lufthansa));
-/* number of planes before buy: 300
-   a new one bought and now it is 301
-*/
-
-eurowings.numOfPlanes = 120;
-
-const newPlaneBtnEW = document.querySelector('.ew-buy');
-
-newPlaneBtnEW.addEventListener('click', lufthansa.buyNewPlane.bind(eurowings));
-/*
-number of planes before buy: 120
-a new one bought and now it is 121
-*/
+// parameters can be used
+(myName => console.log(`Hello ${myName} only once!`))('Halit'); // Hello Halit only once!
