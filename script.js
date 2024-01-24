@@ -1,34 +1,43 @@
 'use strict';
 
 /********************************************/
-/* LOOPIN ARRAYS - forEach(()=>{            */
+/* forEach(()=>{}) with maps and sets       */
 /********************************************/
 
-const bankMovements = [200, -100, -150, 300, 400];
+// with maps
 
-bankMovements.forEach(mov => {
-  const msg = mov > 0 ? ' of $ deposited' : 'of $ withdrawn';
-  console.log(`${Math.abs(mov)} ${msg}`);
-});
+const currenciesMap = new Map([
+  ['USD', 'US Dollar'],
+  ['GBP', 'British Pound'],
+  ['EUR', 'Euro'],
+]);
+
+console.log(currenciesMap);
 /*
-200  of $ deposited
-100 of $ withdrawn
-150 of $ withdrawn
-300  of $ deposited
-400  of $ deposited
+Map(3) {
+  'USD' => 'US Dollar',
+  'GBP' => 'British Pound',
+  'EUR' => 'Euro'
+}
 */
 
-// with indexes;
-bankMovements.forEach((mov, i, arr) => {
-  const msg = mov > 0 ? ' of $ deposit' : 'of $ withdraw';
-  console.log(`Movement ${i + 1} is a ${Math.abs(mov)} ${msg}`);
+currenciesMap.forEach((val, key, mapItself) => {
+  console.log(`${key} is short for ${val}`);
 });
 /*
-Movement 1 is a 200  of $ deposit
-Movement 2 is a 100 of $ withdraw
-Movement 3 is a 150 of $ withdraw
-Movement 4 is a 300  of $ deposit
-Movement 5 is a 400  of $ deposit
+USD is short for US Dollar
+GBP is short for British Pound
+EUR is short for Euro
 */
 
-// a fundamental difference from for of loop : WE CANNOT BREAK OR CONTINUE IN forEach
+// with sets
+const carsSet = new Set(['Citroen', 'Alfa Romeo', 'Mazda', 'Fiat']);
+carsSet.forEach((val, key, setItself) => {
+  console.log(`Number ${key} car I bought was ${val}`);
+});
+/*
+Number Citroen car I bought was Citroen
+Number Alfa Romeo car I bought was Alfa Romeo
+Number Mazda car I bought was Mazda
+Number Fiat car I bought was Fiat
+*/
