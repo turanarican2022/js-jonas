@@ -1,58 +1,24 @@
 'use strict';
 
 /********************************************/
-/* SIMPLE ARRAY METHODS                     */
+/* at() METHOD                              */
 /********************************************/
 
 let arr = ['a', 'b', 'c', 'd', 'e'];
 
-// slice() method -- end parameter is not included
-// does not mutate the original array
+console.log(arr[0] === arr.at(0)); // true
 
-let sliced = arr.slice(2);
-console.log(sliced); // [ 'c', 'd', 'e' ]
-sliced = arr.slice(1, 4);
-console.log(sliced); // [ 'b', 'c', 'd' ]
-console.log(arr); // [ 'a', 'b', 'c', 'd', 'e' ]
-sliced = arr.slice(-3);
-console.log(sliced); // [ 'c', 'd', 'e' ]
-// slice() method can be used to create a "shallow" copy of an array
-let shallow = arr.slice();
-console.log(shallow); // [ 'a', 'b', 'c', 'd', 'e' ]
+// for axample, makes getting the last element of an array shorter
 
-// splice() method -- mutates the original array
-// extracted array is gone from the original array
+console.log(arr[arr.length - 1] === arr.at(-1)); // true
 
-let spliced = arr.splice(2);
-console.log(spliced); // [ 'c', 'd', 'e' ]
-console.log(arr); // [ 'a', 'b' ]
+// for example, slice() method gets the last value as an array with one
+// element inside but at() returns it as a single value
 
-// reverse() -- mutates the original array
-arr = ['j', 'a', 'f', 'b', 'g', 'c', 'd', 'h', 'e', 'i'];
-let reversed = arr.reverse();
-console.log(reversed);
-/*
-[
-  'i', 'e', 'h', 'd',
-  'c', 'g', 'b', 'f',
-  'a', 'j'
-]
-*/
-console.log(arr);
-/*
-[
-  'i', 'e', 'h', 'd',
-  'c', 'g', 'b', 'f',
-  'a', 'j'
-]
-*/
+console.log(arr.slice(-1)); // [ 'e' ]
+console.log(arr.at(-1)); // e
 
-// concat()
-arr = [1, 2, 3];
-arr = arr.concat([4, 5, 6]);
-console.log(arr); // [ 1, 2, 3, 4, 5, 6 ]
+// also works on string
 
-// join()
-arr = ['Citroen', 'Alfa Romeo', 'Mazda', 'Fiat'];
-console.log(`in the past i had ${arr.join(', ')}`);
-// in the past i had Citroen, Alfa Romeo, Mazda, Fiat
+const newName = 'Halide Tuğba';
+console.log(newName.at(-5)); // T
