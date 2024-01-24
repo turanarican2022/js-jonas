@@ -1,24 +1,34 @@
 'use strict';
 
 /********************************************/
-/* at() METHOD                              */
+/* LOOPIN ARRAYS - forEach(()=>{            */
 /********************************************/
 
-let arr = ['a', 'b', 'c', 'd', 'e'];
+const bankMovements = [200, -100, -150, 300, 400];
 
-console.log(arr[0] === arr.at(0)); // true
+bankMovements.forEach(mov => {
+  const msg = mov > 0 ? ' of $ deposited' : 'of $ withdrawn';
+  console.log(`${Math.abs(mov)} ${msg}`);
+});
+/*
+200  of $ deposited
+100 of $ withdrawn
+150 of $ withdrawn
+300  of $ deposited
+400  of $ deposited
+*/
 
-// for axample, makes getting the last element of an array shorter
+// with indexes;
+bankMovements.forEach((mov, i, arr) => {
+  const msg = mov > 0 ? ' of $ deposit' : 'of $ withdraw';
+  console.log(`Movement ${i + 1} is a ${Math.abs(mov)} ${msg}`);
+});
+/*
+Movement 1 is a 200  of $ deposit
+Movement 2 is a 100 of $ withdraw
+Movement 3 is a 150 of $ withdraw
+Movement 4 is a 300  of $ deposit
+Movement 5 is a 400  of $ deposit
+*/
 
-console.log(arr[arr.length - 1] === arr.at(-1)); // true
-
-// for example, slice() method gets the last value as an array with one
-// element inside but at() returns it as a single value
-
-console.log(arr.slice(-1)); // [ 'e' ]
-console.log(arr.at(-1)); // e
-
-// also works on string
-
-const newName = 'Halide Tuğba';
-console.log(newName.at(-5)); // T
+// a fundamental difference from for of loop : WE CANNOT BREAK OR CONTINUE IN forEach
