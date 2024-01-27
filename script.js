@@ -99,3 +99,11 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// the filter() method --- index and the whole array is also given like map()
+
+const deposits = movements.filter((mov, i) => {
+  return mov > 0;
+});
+
+console.log(deposits); // (5) [200, 450, 3000, 70, 1300]
