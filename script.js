@@ -77,6 +77,13 @@ const displayMovements = function (movements) {
 
 displayMovements(account1.movements);
 
+const calcPrintBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+
+calcPrintBalance(account1.movements);
+
 const createUsernames = function (accs) {
   accs.forEach(acc => {
     acc.username = acc.owner
@@ -100,10 +107,28 @@ const currencies = new Map([
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-// the filter() method --- index and the whole array is also given like map()
+// the reduce() method, the second argument zero is the initial value of the accumulator
 
-const deposits = movements.filter((mov, i) => {
-  return mov > 0;
-});
+const balance2 = movements.reduce((acc, cur) => {
+  return acc + cur;
+}, 0);
 
-console.log(deposits); // (5) [200, 450, 3000, 70, 1300]
+console.log(balance2); // 3840
+
+// print max value with reduce()
+
+const maxVal = movements.reduce((acc, cur) => {
+  if (acc > cur) return acc;
+  else return cur;
+}, movements[0]);
+
+console.log(maxVal); // 3000
+
+// print min value with reduce()
+
+const minVal = movements.reduce((acc, cur) => {
+  if (acc < cur) return acc;
+  else return cur;
+}, movements[0]);
+
+console.log(minVal); // -650
