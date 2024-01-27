@@ -87,3 +87,22 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// map() METHOD --- does not mutate the original array
+
+const euToUsd = 1.1;
+
+const inUS = movements.map(mov => {
+  return mov * euToUsd;
+});
+
+console.log(inUS);
+//(8) [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
+
+// like forEach method we have also access to the index and the whole array in the map() method
+
+const nums = [1, 2, 3, 4, 5];
+const multipliedWithSelfIndex = nums.map((num, i, arr) => {
+  return num * i;
+});
+console.log(multipliedWithSelfIndex); // (5) [0, 2, 6, 12, 20]
