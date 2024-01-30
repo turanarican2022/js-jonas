@@ -123,3 +123,10 @@ const currencies = new Map([
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
+
+//////////// find() method ////////////
+// return the first element in the array that meets the condition
+
+const account = accounts.find(acc => acc.owner.includes('Jessica'));
+console.log(account);
+// {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
