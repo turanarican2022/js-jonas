@@ -152,6 +152,21 @@ btnTransfer.addEventListener('click', e => {
   }
 });
 
+btnClose.addEventListener('click', e => {
+  e.preventDefault();
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    accounts.splice(index, 1);
+    containerApp.style.opacity = 0;
+  }
+  inputCloseUsername.value = inputClosePin.value = '';
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -162,9 +177,9 @@ const currencies = new Map([
   ['GBP', 'Pound sterling'],
 ]);
 
-//////////// find() method ////////////
-// return the first element in the array that meets the condition
+////////// findIndex() method //////////
+// return the index of the first found element in the array that meets the condition
+// If no elements satisfy the testing function, -1 is returned.
 
-const account = accounts.find(acc => acc.owner.includes('Jessica'));
-console.log(account);
-// {owner: 'Jessica Davis', movements: Array(8), interestRate: 1.5, pin: 2222, username: 'jd'}
+const eurIndex = [...currencies].findIndex(cur => cur[0] === 'EUR');
+console.log(eurIndex);
